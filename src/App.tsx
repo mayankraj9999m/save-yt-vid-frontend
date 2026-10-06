@@ -18,6 +18,50 @@ function VideoCard({ metadata, mode, computedSize }: { metadata: any, mode: stri
   )
 }
 
+function DeveloperPopup({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="ibm-modal-overlay" onClick={onClose}>
+      <div className="ibm-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="ibm-modal-header">
+          <h3>Developer Details</h3>
+          <button className="ibm-modal-close" onClick={onClose}>&times;</button>
+        </div>
+        <div className="ibm-modal-content">
+          <p><strong>Name:</strong> Mayank Raj</p>
+          <p><strong>Role:</strong> Software Developer</p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/mayankraj9999m" target="_blank" rel="noreferrer" className="ibm-link">mayankraj9999m</a></p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Header() {
+  const [showDevPopup, setShowDevPopup] = useState(false);
+
+  return (
+    <>
+      <header className="ibm-header-bar">
+        <div className="ibm-header-logo">Save YT Video</div>
+        <div className="ibm-header-links">
+          <a href="https://github.com/mayankraj9999m/save-yt-vid-frontend" target="_blank" rel="noreferrer" className="ibm-link">GitHub (Frontend)</a>
+          <a href="https://github.com/mayankraj9999m/save-yt-vid-backend" target="_blank" rel="noreferrer" className="ibm-link">GitHub (Backend)</a>
+          <button className="ibm-header-btn" onClick={() => setShowDevPopup(true)}>Developer Details</button>
+        </div>
+      </header>
+      {showDevPopup && <DeveloperPopup onClose={() => setShowDevPopup(false)} />}
+    </>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="ibm-footer">
+      <p>&copy; {new Date().getFullYear()} Save YT Video. All rights reserved.</p>
+    </footer>
+  )
+}
+
 function App() {
   const [url, setUrl] = useState('')
   const [mode, setMode] = useState<'OPTIMAL' | 'BEST' | 'CUSTOM'>('OPTIMAL')
@@ -238,156 +282,159 @@ function App() {
   }
 
   return (
-    <div className="ibm-app">
-      <h1 className="ibm-header">Save YT Video</h1>
+    <>
+      <Header />
+      <div className="ibm-app">
 
-      {!metadata && !downloading && !downloadPath && (
-        <div className="ibm-card">
-          <label className="ibm-label">YouTube URL</label>
-          <input
-            type="text"
-            className="ibm-input"
-            style={{ marginBottom: '1.5rem' }}
-            placeholder="https://www.youtube.com/watch?v=..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-
-          <label className="ibm-label">Download Quality</label>
-          <div className="ibm-radio-group">
-            <label className="ibm-radio">
-              <input type="radio" name="mode" checked={mode === 'OPTIMAL'} onChange={() => setMode('OPTIMAL')} />
-              Optimal (1080p limit)
-            </label>
-            <label className="ibm-radio">
-              <input type="radio" name="mode" checked={mode === 'BEST'} onChange={() => setMode('BEST')} />
-              Best (Highest available)
-            </label>
-            <label className="ibm-radio">
-              <input type="radio" name="mode" checked={mode === 'CUSTOM'} onChange={() => setMode('CUSTOM')} />
-              Custom Selection
-            </label>
-          </div>
-
-          <button className="ibm-button" onClick={fetchInfo} disabled={loading || !url}>
-            {loading ? 'Fetching...' : 'Fetch Info'}
-          </button>
-
-          {error && <div className="ibm-error">{error}</div>}
-        </div>
-      )}
-
-      {metadata && !downloadPath && !downloading && (
-        <div className="ibm-card">
-          <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
-
-          {/* Quality Mode was selected in the previous step */}
-
-          {mode === 'CUSTOM' && (
-            <div className="ibm-split-pane">
-              <div className="ibm-pane">
-                <div className="ibm-pane-title">Video Formats</div>
-                {videoFormats.map(f => (
-                  <label key={f.format_id} className="ibm-format-item">
-                    <input
-                      type="checkbox"
-                      checked={selectedVideo === f.format_id}
-                      onChange={(e) => setSelectedVideo(e.target.checked ? f.format_id : '')}
-                    />
-                    <div className="ibm-format-label">
-                      <span>{f.resolution} ({f.ext})</span>
-                      <span>{f.filesize}</span>
-                    </div>
-                  </label>
-                ))}
-              </div>
-              <div className="ibm-pane">
-                <div className="ibm-pane-title">Audio Formats</div>
-                {audioFormats.map(f => (
-                  <label key={f.format_id} className="ibm-format-item">
-                    <input
-                      type="checkbox"
-                      checked={selectedAudio === f.format_id}
-                      onChange={(e) => setSelectedAudio(e.target.checked ? f.format_id : '')}
-                    />
-                    <div className="ibm-format-label">
-                      <span>{f.acodec} ({f.ext})</span>
-                      <span>{f.filesize}</span>
-                    </div>
-                  </label>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginTop: '2rem' }}>
-            <label className="ibm-label">Download Location (Optional, Absolute Path)</label>
+        {!metadata && !downloading && !downloadPath && (
+          <div className="ibm-card">
+            <label className="ibm-label">YouTube URL</label>
             <input
               type="text"
               className="ibm-input"
-              placeholder="C:\Users\username\Downloads"
-              value={customLocation}
-              onChange={(e) => setCustomLocation(e.target.value)}
+              style={{ marginBottom: '1.5rem' }}
+              placeholder="https://www.youtube.com/watch?v=..."
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
             />
-          </div>
 
-          {error && <div className="ibm-error">{error}</div>}
+            <label className="ibm-label">Download Quality</label>
+            <div className="ibm-radio-group">
+              <label className="ibm-radio">
+                <input type="radio" name="mode" checked={mode === 'OPTIMAL'} onChange={() => setMode('OPTIMAL')} />
+                Optimal (1080p limit)
+              </label>
+              <label className="ibm-radio">
+                <input type="radio" name="mode" checked={mode === 'BEST'} onChange={() => setMode('BEST')} />
+                Best (Highest available)
+              </label>
+              <label className="ibm-radio">
+                <input type="radio" name="mode" checked={mode === 'CUSTOM'} onChange={() => setMode('CUSTOM')} />
+                Custom Selection
+              </label>
+            </div>
 
-          <div className="ibm-button-group">
-            <button className="ibm-button" onClick={handleDownload}>
-              Download Video
+            <button className="ibm-button" onClick={fetchInfo} disabled={loading || !url}>
+              {loading ? 'Fetching...' : 'Fetch Info'}
             </button>
-            <button className="ibm-button ibm-button--secondary" onClick={handleStartOver}>
-              Cancel / Start Over
-            </button>
+
+            {error && <div className="ibm-error">{error}</div>}
           </div>
-        </div>
-      )}
+        )}
 
-      {downloading && (
-        <div className="ibm-card">
-          <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
-          <div className="ibm-title">Downloading...</div>
-          <div className="ibm-meta-item">{downloadStatus}</div>
+        {metadata && !downloadPath && !downloading && (
+          <div className="ibm-card">
+            <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
 
-          <div className="ibm-progress-area">
-            {progressLog || 'Waiting for progress updates...'}
-          </div>
+            {/* Quality Mode was selected in the previous step */}
 
-          <div className="ibm-button-group">
-            {isPaused ? (
-              <button className="ibm-button" onClick={handleResume}>
-                Resume Download
-              </button>
-            ) : (
-              <button className="ibm-button ibm-button--secondary" onClick={handlePause}>
-                Pause Download
-              </button>
+            {mode === 'CUSTOM' && (
+              <div className="ibm-split-pane">
+                <div className="ibm-pane">
+                  <div className="ibm-pane-title">Video Formats</div>
+                  {videoFormats.map(f => (
+                    <label key={f.format_id} className="ibm-format-item">
+                      <input
+                        type="checkbox"
+                        checked={selectedVideo === f.format_id}
+                        onChange={(e) => setSelectedVideo(e.target.checked ? f.format_id : '')}
+                      />
+                      <div className="ibm-format-label">
+                        <span>{f.resolution} ({f.ext})</span>
+                        <span>{f.filesize}</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+                <div className="ibm-pane">
+                  <div className="ibm-pane-title">Audio Formats</div>
+                  {audioFormats.map(f => (
+                    <label key={f.format_id} className="ibm-format-item">
+                      <input
+                        type="checkbox"
+                        checked={selectedAudio === f.format_id}
+                        onChange={(e) => setSelectedAudio(e.target.checked ? f.format_id : '')}
+                      />
+                      <div className="ibm-format-label">
+                        <span>{f.acodec} ({f.ext})</span>
+                        <span>{f.filesize}</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
             )}
 
-            <button className="ibm-button ibm-button--danger" onClick={handleCancel}>
-              Cancel Process
-            </button>
-          </div>
-        </div>
-      )}
+            <div style={{ marginTop: '2rem' }}>
+              <label className="ibm-label">Download Location (Optional, Absolute Path)</label>
+              <input
+                type="text"
+                className="ibm-input"
+                placeholder="C:\Users\username\Downloads\save-yt-video"
+                value={customLocation}
+                onChange={(e) => setCustomLocation(e.target.value)}
+              />
+            </div>
 
-      {downloadPath && !downloading && (
-        <div className="ibm-card">
-          <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
-          <div className="ibm-download-success">
-            <h3 style={{ margin: '0 0 1rem 0' }}>Download Completed Successfully!</h3>
-            <p style={{ margin: 0, fontFamily: 'monospace', fontSize: '14px' }}>{downloadPath}</p>
-          </div>
+            {error && <div className="ibm-error">{error}</div>}
 
-          <div style={{ marginTop: '2rem' }}>
-            <button className="ibm-button" onClick={handleStartOver}>
-              Download Another Video
-            </button>
+            <div className="ibm-button-group">
+              <button className="ibm-button" onClick={handleDownload}>
+                Download Video
+              </button>
+              <button className="ibm-button ibm-button--secondary" onClick={handleStartOver}>
+                Cancel / Start Over
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+
+        {downloading && (
+          <div className="ibm-card">
+            <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
+            <div className="ibm-title">Downloading...</div>
+            <div className="ibm-meta-item">{downloadStatus}</div>
+
+            <div className="ibm-progress-area">
+              {progressLog || 'Waiting for progress updates...'}
+            </div>
+
+            <div className="ibm-button-group">
+              {isPaused ? (
+                <button className="ibm-button" onClick={handleResume}>
+                  Resume Download
+                </button>
+              ) : (
+                <button className="ibm-button ibm-button--secondary" onClick={handlePause}>
+                  Pause Download
+                </button>
+              )}
+
+              <button className="ibm-button ibm-button--danger" onClick={handleCancel}>
+                Cancel Process
+              </button>
+            </div>
+          </div>
+        )}
+
+        {downloadPath && !downloading && (
+          <div className="ibm-card">
+            <VideoCard metadata={metadata} mode={mode} computedSize={computedSize} />
+            <div className="ibm-download-success">
+              <h3 style={{ margin: '0 0 1rem 0' }}>Download Completed Successfully!</h3>
+              <p style={{ margin: 0, fontFamily: 'monospace', fontSize: '14px' }}>{downloadPath}</p>
+            </div>
+
+            <div style={{ marginTop: '2rem' }}>
+              <button className="ibm-button" onClick={handleStartOver}>
+                Download Another Video
+              </button>
+            </div>
+          </div>
+        )}
+        <Footer />
+      </div>
+    </>
   )
 }
 

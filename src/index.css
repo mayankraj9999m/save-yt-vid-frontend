@@ -44,9 +44,9 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* Base styles for IBM Carbon feel */
 .ibm-app {
-  max-width: 1056px;
+  /* max-width: 1056px; */
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0rem 1rem;
 }
 
 .ibm-header {
@@ -239,6 +239,111 @@ h1, h2, h3, h4, h5, h6, p {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+/* Header */
+.ibm-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--inverse-canvas);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+.ibm-header-logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--inverse-ink);
+}
+.ibm-header-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.ibm-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 14px;
+}
+.ibm-link:hover {
+  text-decoration: underline;
+}
+
+.ibm-header-links .ibm-link {
+  color: var(--inverse-ink-muted);
+}
+.ibm-header-links .ibm-link:hover {
+  color: var(--inverse-ink);
+}
+.ibm-header-btn {
+  background: none;
+  border: none;
+  color: var(--inverse-ink-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+.ibm-header-btn:hover {
+  color: var(--inverse-ink);
+  text-decoration: underline;
+}
+
+/* Footer */
+.ibm-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+/* Modal Popup */
+.ibm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.ibm-modal {
+  background-color: var(--canvas);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 400px;
+  border: 1px solid var(--hairline);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.ibm-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.ibm-modal-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.ibm-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--ink-muted);
+  line-height: 1;
+}
+.ibm-modal-close:hover {
+  color: var(--ink);
+}
+.ibm-modal-content p {
+  margin-bottom: 0.75rem;
+  font-size: 14px;
 }
 
 /* Responsive styles */
