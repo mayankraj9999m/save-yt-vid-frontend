@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+:root {
+  --primary: #0f62fe;
+  --on-primary: #ffffff;
+  --ink: #161616;
+  --ink-muted: #525252;
+  --ink-subtle: #8c8c8c;
+  --canvas: #ffffff;
+  --surface-1: #f4f4f4;
+  --surface-2: #e0e0e0;
+  --inverse-canvas: #161616;
+  --inverse-surface-1: #262626;
+  --inverse-ink: #ffffff;
+  --inverse-ink-muted: #c6c6c6;
+  --hairline: #e0e0e0;
+  --hairline-strong: #161616;
+  --blue-60: #0043ce;
+  --blue-80: #002d9c;
+  --blue-hover: #0050e6;
+  --semantic-success: #24a148;
+  --semantic-warning: #f1c21b;
+  --semantic-error: #da1e28;
+  --semantic-info: #0f62fe;
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: var(--surface-1);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styles for IBM Carbon feel */
+.ibm-app {
+  max-width: 1056px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.ibm-header {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  letter-spacing: -0.4px;
+}
+
+.ibm-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid var(--hairline-strong);
+  background-color: var(--canvas);
+  color: var(--ink);
+  outline: none;
+  border-radius: 0;
+  transition: outline 0.15s;
+}
+.ibm-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.ibm-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  transition: background-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+.ibm-button:hover {
+  background-color: var(--blue-hover);
+}
+.ibm-button:disabled {
+  background-color: var(--surface-2);
+  color: var(--ink-muted);
+  cursor: not-allowed;
+}
+.ibm-button--secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.ibm-button--secondary:hover {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+.ibm-button--danger {
+  background-color: var(--semantic-error);
+  color: var(--on-primary);
+}
+.ibm-button--danger:hover {
+  background-color: #ba1b23;
+}
+
+.ibm-card {
+  background-color: var(--canvas);
+  border: 1px solid var(--hairline);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.ibm-metadata {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.ibm-thumbnail {
+  width: 340px;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid var(--hairline);
+}
+.ibm-meta-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ibm-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.ibm-quality {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--semantic-success);
+}
+.ibm-meta-item {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.ibm-label {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.ibm-radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ibm-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ibm-split-pane {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.ibm-pane {
+  flex: 1;
+  background-color: var(--surface-1);
+  padding: 1rem;
+  border: 1px solid var(--hairline);
+}
+.ibm-pane-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.ibm-format-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+.ibm-format-item:last-child {
+  border-bottom: none;
+}
+.ibm-format-label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+}
+
+.ibm-progress-area {
+  background-color: var(--inverse-canvas);
+  color: var(--inverse-ink);
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 14px;
+  margin-top: 1.5rem;
+  min-height: 80px;
+}
+
+.ibm-download-success {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #defbe6;
+  border-left: 4px solid var(--semantic-success);
+  color: var(--ink);
+}
+
+.ibm-error {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff1f1;
+  border-left: 4px solid var(--semantic-error);
+  color: var(--ink);
+}
+
+.ibm-button-group {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .ibm-app {
+    padding: 1rem;
+  }
+  
+  .ibm-header {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  .ibm-card {
+    padding: 1rem;
+  }
+
+  .ibm-metadata {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ibm-thumbnail {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ibm-split-pane {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ibm-radio-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .ibm-button {
+    width: 100%;
+  }
+}
